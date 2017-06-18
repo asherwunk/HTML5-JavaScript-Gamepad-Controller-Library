@@ -19,6 +19,10 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  Modified by: Asher Wolfstein (asherwunk@gmail.com) June 18th, 2017
+ *               For more information see my blog at http://wunk.me/
+ *               Also the specific URL: http://wunk.me/programming-projects/pygjs
  */
 
 (function(exports) {
@@ -760,6 +764,7 @@
 		gamepad.updater = [];
 
 		count = mapping.buttons.byButton.length;
+		
 		for (i = 0; i < count; i++) {
 			this._addButtonUpdater(gamepad, mapping, i);
 		}
@@ -801,13 +806,13 @@
 			var lastValue = gamepad.lastState[controlName];
 			var isDown = value > 0.5;
 			var wasDown = lastValue > 0.5;
-
+			
 			gamepad.state[controlName] = value;
 
 			if (isDown && !wasDown) {
-				that._fire(Gamepad.Event.BUTTON_DOWN, Object.create(buttonEventData));
+				that._fire(Gamepad.Event.BUTTON_DOWN, buttonEventData);
 			} else if (!isDown && wasDown) {
-				that._fire(Gamepad.Event.BUTTON_UP, Object.create(buttonEventData));
+				that._fire(Gamepad.Event.BUTTON_UP, buttonEventData);
 			}
 
 			if ((value !== 0) && (value !== 1) && (value !== lastValue)) {
